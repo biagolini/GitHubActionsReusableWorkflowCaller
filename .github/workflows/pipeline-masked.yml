@@ -1,0 +1,16 @@
+# Caller workflow: calls the masked (fixed) reusable workflow of the central catalog.
+# The two repository secrets below hold FAKE values created only for this demo.
+name: Pipeline (masked)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    uses: biagolini/GitHubActionsReusableWorkflowCatalog/.github/workflows/terraform-masked.yml@main
+    secrets:
+      extra_tf_secrets: >-
+        {
+          "db_password": "${{ secrets.DB_PASSWORD }}",
+          "api_private_key": "${{ secrets.API_PRIVATE_KEY }}"
+        }
